@@ -1,0 +1,12 @@
+{
+    "items": 3,
+    "skip_validateItems": true,
+    "loop": true,
+    "dots": false,
+    "nav": true,
+    "navSpeed": 700,
+    "navText": ["", ""],
+    "autoplay": true,
+    "autoplaySpeed": 1000,
+    "margin": 24
+}

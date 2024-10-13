@@ -1,0 +1,82 @@
+@import '../../../../assets/styles/typography.scss';
+
+:host {
+    display: block;
+    width: 100%;
+
+    .review {
+
+        .review__header {
+            display: flex;
+
+            .review__avatar {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                border: 2px solid var(--primary-medium-blue-color);
+                background-color: var(--primary-light-blue-color);
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                margin-right: 26px;
+            }
+
+            .review__info {
+
+                .review__name {
+                    @include montserrat-bold-18-mblue;
+                    margin-bottom: 10px;
+                }
+
+                .review__datetime {
+                    @include montserrat-bold-14-lgrey;
+                }
+            }
+        }
+
+        .review__body {
+            padding-top: 15px;
+            padding-bottom: 39px;
+            @include montserrat-reg-14-dblue;
+        }
+
+        .review__actions {
+            display: flex;
+            gap: 15px;
+
+            .review__action {
+
+                span {
+                    @include montserrat-bold-14-dblue;
+                    margin-right: 3px;
+                    vertical-align: middle;
+                }
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+                    cursor: pointer;
+                    vertical-align: middle;
+                }
+
+                &.disabled {
+                    span,
+                    svg {
+                        color: var(--primary-light-grey-color);
+                    }
+
+                    svg {
+                        cursor: not-allowed;
+                    }
+                }
+
+                &.active {
+                    span,
+                    svg {
+                        color: var(--primary-medium-blue-color);
+                    }
+                }
+            }
+        }
+    }
+}

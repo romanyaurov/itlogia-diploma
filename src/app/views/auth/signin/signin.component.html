@@ -1,0 +1,93 @@
+<div class="signin">
+    <div class="signin__content">
+        <div class="signin__title">
+            Войти в личный кабинет
+        </div>
+        <form 
+            class="signin__form form"
+            [formGroup]="signInForm"
+            (ngSubmit)="onSubmit()"
+        >
+            <div class="form__items">
+                <label class="form__item">
+                    <input 
+                        type="text"
+                        class="common-input"
+                        placeholder="Электронная почта"
+                        formControlName="{{ loginFieldsEnum.email }}"
+                        [class.invalid-input]="signInForm.get(loginFieldsEnum.email)?.invalid &&
+                        (signInForm.get(loginFieldsEnum.email)?.touched || signInForm.get(loginFieldsEnum.email)?.dirty)"
+                    >
+                    @if (signInForm.get(loginFieldsEnum.email)?.touched || signInForm.get(loginFieldsEnum.email)?.dirty) {
+                        <svg
+                            class="form__icon"
+                            [icon]="signInForm.get(loginFieldsEnum.email)?.invalid ? 'error-icon' : 'checked-icon'"
+                            [style.color]="signInForm.get(loginFieldsEnum.email)?.invalid ? 'red' : 'green'"
+                        >
+                        </svg>
+                    }
+                </label>
+                <label class="form__item">
+                    <input
+                        [type]="isPasswordVisible() ? 'text' : 'password'"
+                        class="common-input"
+                        placeholder="Пароль"
+                        formControlName="{{ loginFieldsEnum.password }}"
+                        [class.invalid-input]="signInForm.get(loginFieldsEnum.password)?.invalid &&
+                        (signInForm.get(loginFieldsEnum.password)?.touched || signInForm.get(loginFieldsEnum.password)?.dirty)"
+                    >
+                    @if (signInForm.get(loginFieldsEnum.password)?.touched || signInForm.get(loginFieldsEnum.password)?.dirty) {
+                        <svg
+                            class="form__icon"
+                            [icon]="signInForm.get(loginFieldsEnum.password)?.invalid ? 'error-icon' : 'checked-icon'"
+                            [style.color]="signInForm.get(loginFieldsEnum.password)?.invalid ? 'red' : 'green'"
+                        >
+                        </svg>
+                    }
+                    <svg
+                        class="form__eye"
+                        [icon]="isPasswordVisible() ? 'invisible-icon' : 'visible-icon'"
+                        (click)="isPasswordVisible.set(!isPasswordVisible())"
+                    >
+                    </svg>
+                </label>
+                <label class="common-checkbox-block">
+                    <input 
+                        type="checkbox"
+                        class="common-checkbox-input"
+                        formControlName="{{ loginFieldsEnum.rememberMe }}"
+                    >
+                    <span class="common-checkbox-description">
+                        Запомнить меня
+                    </span>
+                </label>
+            </div>
+            <div class="form__action">
+                <button 
+                    class="common-btn btn-l btn-100"
+                    type="submit"
+                    [disabled]="signInForm.invalid"
+                >
+                    Войти
+                </button>
+            </div>
+        </form>
+        <div class="signin__redirect">
+            <span>
+                Нет аккаунта?
+            </span>
+            <a
+                class="common-link" 
+                routerLink="/signup"
+            >
+                Пройдите регистрацию
+            </a>
+        </div>
+    </div>
+    <div class="signin__image">
+        <img
+            src="../../../../assets/images/signin-img.png"
+            alt="Smiling Worker"
+        >
+    </div>
+</div>

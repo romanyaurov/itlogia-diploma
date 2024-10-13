@@ -1,0 +1,21 @@
+<div class="article-card">
+    <div class="article-card__badge">
+        {{ article.category }}
+    </div>
+    <div 
+        class="article-card__image"
+        [style.background-image]="article.image | serverImagePath"
+    ></div>
+    <div class="article-card__title">
+        {{ article.title | maxTextLength:90 }}
+    </div>
+    <div class="article-card__description">
+        {{ article.description | maxTextLength:200 }}
+    </div>
+    <div class="article-card__link">
+        <!-- <a routerLink="{{ '/article/' + article.url}} "> -->
+        <a routerLink="/article/{{ article.url }}">
+            Читать дальше
+        </a>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="review">
+    <div class="review__header">
+        <div 
+            class="review__avatar"
+            [style.background-image]="'default-review-avatar' | staticImagePath"    
+        >
+        </div>
+        <div class="review__info">
+            <div class="review__name">
+                {{ comment.user.name }}
+            </div>
+            <div class="review__datetime">
+                {{ comment.date | reviewDatetime }}
+            </div>
+        </div>
+    </div>
+    <div class="review__body">
+        {{ comment.text }}
+    </div>
+    <div class="review__actions">
+        <!-- . Like Action -->
+        <div
+            class="review__action"
+            [class.disabled]="!authService.isAuth"
+            [class.active]="authService.isAuth &&
+            (comment.action && comment.action === commentActionsEnum.like)"  
+            (click)="emitCommentAction(commentActionsEnum.like, $event)"
+        >
+            <span>{{ comment.likesCount }}</span>
+            <svg icon="like-icon"></svg>
+        </div>
+        <!-- / Like Action -->
+        <!-- . Dislike Action -->
+        <div
+            class="review__action"
+            [class.disabled]="!authService.isAuth"
+            [class.active]="authService.isAuth &&
+            (comment.action && comment.action === commentActionsEnum.dislike)"
+            (click)="emitCommentAction(commentActionsEnum.dislike, $event)"
+        >
+            <span>{{ comment.dislikesCount }}</span>
+            <svg icon="dislike-icon"></svg>
+        </div>
+        <!-- / Dislike Action -->
+        <!-- . Violate Action -->
+        <div 
+            class="review__action"
+            [class.disabled]="!authService.isAuth"
+            (click)="emitCommentAction(commentActionsEnum.violate, $event)"
+        >
+            <svg icon="violate-icon"></svg>
+        </div>
+        <!-- / Violate Action -->
+    </div>
+</div>

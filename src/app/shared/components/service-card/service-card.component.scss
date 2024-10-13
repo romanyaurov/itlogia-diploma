@@ -1,0 +1,40 @@
+@import '../../../../assets/styles/typography.scss';
+
+:host {
+    display: block;
+    width: 290px;
+}
+
+.service {
+    .service__image {
+        width: 290px;
+        height: 290px;
+        border-radius: 5px;
+        background-color: var(--primary-grey-color);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-bottom: 15px;
+    }
+
+    .service__title {
+        @include montserrat-med-20-mblue;
+        margin-bottom: 10px;
+    }
+
+    .service__description {
+        @include montserrat-reg-14-dblue;
+        height: 90px;
+        margin-bottom: 15px;
+    }
+
+    .service__info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .service__price {
+            @include montserrat-bold-20-mblue;
+        }
+    }
+}

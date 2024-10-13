@@ -1,0 +1,134 @@
+@if (article) {
+    <div class="article">
+        <section class="article__breadcrumbs">
+            <a
+                class="pale-blue"                
+                routerLink="/blog"
+            >
+                Блог
+            </a>
+            <span class="pale-blue"> / </span>
+            <span>
+                {{ article.title }}
+            </span>
+        </section>
+        <section class="article__info">
+            <div class="article__caption">
+                <h2 class="article__title">
+                    {{ article.title }}
+                </h2>
+                <p class="article__description">
+                    {{ article.description }}
+                </p>
+            </div>
+            <div 
+                class="article__image"
+                [style.background-image]="article.image | serverImagePath"    
+            >
+            </div>
+        </section>
+        <section class="article__main">
+            <main class="article__body">
+                <article 
+                    class="article__text"
+                    [innerHTML]="article.text"
+                >
+                </article>
+                <section 
+                    class="article__social social"
+                    [class.mb-120]="authService.isAuth"    
+                >
+                    <span class="social__text">
+                        Понравилась статья? Поделитесь ею в своих социальных сетях!
+                    </span>
+                    <div class="social__icons">
+                        <a href="http://vk.com">
+                            <svg icon="vk-icon"></svg>
+                        </a>
+                        <a href="http://facebook.com">
+                            <svg icon="fb-icon"></svg>
+                        </a>
+                        <a href="http://instagram.com">
+                            <svg icon="inst-icon"></svg>
+                        </a>
+                    </div>
+                </section>
+                <section class="article__comments comments">
+                    <h2 class="comments__title">
+                        Комментарии к статье
+                    </h2>
+                    @if (article.comments.length === 0) {
+                        <div class="comments__first">
+                            <span>
+                                Будьте первым, кто оставит свой комментарий к статье!
+                            </span>
+                        </div>
+                    }
+                    @if (!authService.isAuth) {
+                        <div class="comments__auth">
+                            <span>Чтобы оставлять комментарии, </span>
+                            <a routerLink="/signin">войдите</a>
+                            <span> или </span>
+                            <a routerLink="/signup">зарегистрируйтесь</a>
+                            <span>.</span>
+                        </div>
+                    } @else {
+                        <div class="comments__form">
+                            <textarea
+                                class="comments__input"
+                                placeholder="Напишите Ваш комментарий к статье..."
+                                [(ngModel)]="commentInputValue"
+                                [ngModelOptions]="{ standalone: true }"
+                            >
+                            </textarea>
+                            <button
+                                type="button"
+                                class="comments__action common-btn btn-l"
+                                (click)="postComment()"
+                                [disabled]="!commentInputValue"
+                            >
+                                Опубликовать комментарий
+                            </button>
+                        </div>
+                    }
+                    @if (article.comments.length > 0) {
+                        <div class="comments__reviews">
+                            @for (comment of article.comments; track comment.id) {
+                                <div class="comments__review">
+                                    <app-comment-card
+                                        [comment]="comment"
+                                        (actionEmitter)="postCommentAction($event)"
+                                    >
+                                    </app-comment-card>
+                                </div>
+                            }
+                        </div>
+                    }
+                    @if (article.commentsCount > article.comments.length) {
+                        <div 
+                            class="commets__load"
+                            (click)="loadAllComments()"
+                        >
+                            <span>Загрузить ещё комментарии</span>
+                            <svg icon="chevron-simple"></svg>
+                        </div>
+                    }
+                </section>
+            </main>
+            @if (article.related && article.related.length > 0) {
+                <aside class="article__related related">
+                    <h3 class="related__title">
+                        Читайте также:
+                    </h3>
+                    <div class="related__items">
+                        @for (relatedArticle of article.related; track relatedArticle.id) {
+                            <div class="related__item">
+                                <app-article-card [article]="relatedArticle"></app-article-card>
+                            </div>
+                        }
+                    </div>
+                </aside>
+            }
+        </section>
+    </div>
+}

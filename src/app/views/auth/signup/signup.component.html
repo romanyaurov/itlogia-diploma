@@ -1,0 +1,125 @@
+<div class="signup">
+    <div class="signup__content">
+        <div class="signup__title">
+            Регистрация на сайте
+        </div>
+        <form 
+            class="signup__form form"
+            [formGroup]="signUpForm"
+            (ngSubmit)="onSubmit()"
+        >
+            <div class="form__items">
+                <label class="form__item">
+                    <input 
+                        type="text"
+                        class="common-input"
+                        placeholder="Ваше имя"
+                        formControlName="{{ signupFieldsEnum.name }}"
+                        [class.invalid-input]="signUpForm.get(signupFieldsEnum.name)?.invalid &&
+                        (signUpForm.get(signupFieldsEnum.name)?.touched || signUpForm.get(signupFieldsEnum.name)?.dirty)"
+                        appNameInput
+                    >
+                    @if (signUpForm.get(signupFieldsEnum.name)?.touched || signUpForm.get(signupFieldsEnum.name)?.dirty) {
+                        <svg
+                            class="form__icon"
+                            [icon]="signUpForm.get(signupFieldsEnum.name)?.invalid ? 'error-icon' : 'checked-icon'"
+                            [style.color]="signUpForm.get(signupFieldsEnum.name)?.invalid ? 'red' : 'green'"
+                        >
+                        </svg>
+                    }
+                </label>
+                <label class="form__item">
+                    <input 
+                        type="text"
+                        class="common-input"
+                        placeholder="Электронная почта"
+                        formControlName="{{ signupFieldsEnum.email }}"
+                        [class.invalid-input]="signUpForm.get(signupFieldsEnum.email)?.invalid &&
+                        (signUpForm.get(signupFieldsEnum.email)?.touched || signUpForm.get(signupFieldsEnum.email)?.dirty)"
+                    >
+                    @if (signUpForm.get(signupFieldsEnum.email)?.touched || signUpForm.get(signupFieldsEnum.email)?.dirty) {
+                        <svg
+                            class="form__icon"
+                            [icon]="signUpForm.get(signupFieldsEnum.email)?.invalid ? 'error-icon' : 'checked-icon'"
+                            [style.color]="signUpForm.get(signupFieldsEnum.email)?.invalid ? 'red' : 'green'"
+                        >
+                        </svg>
+                    }
+                </label>
+                <label class="form__item">
+                    <input
+                        [type]="isPasswordVisible() ? 'text' : 'password'"
+                        class="common-input"
+                        placeholder="Пароль"
+                        formControlName="{{ signupFieldsEnum.password }}"
+                        [class.invalid-input]="signUpForm.get(signupFieldsEnum.password)?.invalid &&
+                        (signUpForm.get(signupFieldsEnum.password)?.touched || signUpForm.get(signupFieldsEnum.password)?.dirty)"
+                    >
+                    @if (signUpForm.get(signupFieldsEnum.password)?.touched || signUpForm.get(signupFieldsEnum.password)?.dirty) {
+                        <svg
+                            class="form__icon"
+                            [icon]="signUpForm.get(signupFieldsEnum.password)?.invalid ? 'error-icon' : 'checked-icon'"
+                            [style.color]="signUpForm.get(signupFieldsEnum.password)?.invalid ? 'red' : 'green'"
+                        >
+                        </svg>
+                    }
+                    <svg
+                        class="form__eye"
+                        [icon]="isPasswordVisible() ? 'invisible-icon' : 'visible-icon'"
+                        (click)="isPasswordVisible.set(!isPasswordVisible())"
+                    >
+                    </svg>
+                </label>
+                <label class="common-checkbox-block">
+                    <input 
+                        type="checkbox"
+                        class="common-checkbox-input"
+                        formControlName="{{ signupFieldsEnum.agreement }}"
+                    >
+                    <span class="common-checkbox-description">
+                        Я принимаю 
+                        <a (click)="
+                            $event.preventDefault(); 
+                            modalService.open(modalTemplatesEnum.modalAgreementInfo);
+                        ">
+                            условия пользовательского соглашения
+                        </a> 
+                        и даю 
+                        <a (click)="
+                            $event.preventDefault();
+                            modalService.open(modalTemplatesEnum.modalProcessingInfo);
+                        ">
+                            согласие на обработку персональных данных.
+                        </a>
+                    </span>
+                </label>
+            </div>
+            <div class="form__action">
+                <button 
+                    class="common-btn btn-l btn-100"
+                    type="submit"
+                    [disabled]="signUpForm.invalid"
+                >
+                    Войти
+                </button>
+            </div>
+        </form>
+        <div class="signup__redirect">
+            <span>
+                Уже есть аккаунт?
+            </span>
+            <a
+                class="common-link" 
+                routerLink="/signin"
+            >
+                Войдите
+            </a>
+        </div>
+    </div>
+    <div class="signup__image">
+        <img
+            src="../../../../assets/images/signup-img.png"
+            alt=""
+        >
+    </div>
+</div>

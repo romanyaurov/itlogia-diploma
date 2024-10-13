@@ -1,0 +1,193 @@
+@mixin montserrat-med-16-mblue {
+    font-family: var(--main-font);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+}
+
+@mixin montserrat-med-14-mblue {
+    font-family: var(--main-font);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+}
+
+@mixin montserrat-reg-16-dblue {
+    font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: var(--primary-dark-blue-color);
+}
+
+@mixin montserrat-reg-20-dblue {
+    font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 130%;
+    color: var(--primary-dark-blue-color);
+}
+
+@mixin montserrat-reg-14-dblue {
+    font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--primary-dark-blue-color);
+}
+
+@mixin montserrat-reg-16-mblue {
+    font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+}
+
+@mixin montserrat-reg-16-dblue-lh140 {
+    font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: var(--primary-dark-blue-color);
+}
+
+@mixin montserrat-reg-14-mblue {
+    font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+}
+
+@mixin montserrat-reg-20-mblue {
+    font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+}
+
+@mixin montserrat-reg-11-mblue {
+    font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+}
+
+@mixin montserrat-reg-24-white {
+    font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 130%;
+    color: var(--primary-white-color);
+}
+
+@mixin montserrat-med-20-mblue {
+    font-family: var(--main-font);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+}
+
+@mixin montserrat-med-14-sdblue {
+    font-family: var(--main-font);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--pramiry-second-dark-blue-color);
+}
+
+@mixin montserrat-reg-14-sdblue {
+    font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--pramiry-second-dark-blue-color);
+}
+
+@mixin montserrat-bold-20-mblue {
+    font-family: var(--main-font);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+}
+
+@mixin montserrat-bold-18-mblue {
+    font-family: var(--main-font);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+}
+
+@mixin montserrat-bold-14-lgrey {
+    font-family: var(--main-font);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--primary-light-grey-color);
+}
+
+@mixin montserrat-bold-14-dblue {
+    font-family: var(--main-font);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--primary-dark-blue-color);
+}
+
+@mixin montserrat-bold-12-blue-ls04-ttu {
+    font-family: var(--main-font);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 130%;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--primary-medium-blue-color);
+}
+
+@mixin lora-50-white {
+    font-family: var(--second-font);
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 130%;
+    color: var(--primary-white-color);
+}
+
+@mixin lora-50-mblue {
+    font-family: var(--second-font);
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+}
+
+@mixin lora-38-mblue {
+    font-family: var(--second-font);
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+}
+
+@mixin lora-36-mblue {
+    font-family: var(--second-font);
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+}
+
+@mixin lora-26-mblue {
+    font-family: var(--second-font);
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+}

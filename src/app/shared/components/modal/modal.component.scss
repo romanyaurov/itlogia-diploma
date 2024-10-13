@@ -1,0 +1,85 @@
+@import '../../../../assets/styles/typography.scss';
+
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff50;
+    z-index: 99;
+    overflow: hidden;
+}
+
+.custom-modal {
+    border: 1px solid #709fdc;
+    border-radius: 10px;
+    width: 727px;
+    height: 489px;
+    background-color: #fff;
+    position: relative;
+
+    .custom-modal_close {
+        position: absolute;
+        top: 32px;
+        right: 31px;
+        cursor: pointer;
+    }
+
+    &::ng-deep {
+
+        .modal-title {
+            @include lora-38-mblue;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-form__item {
+            width: 100%;
+            position: relative;
+            display: inline-block;
+
+            .modal-form__icon {
+                color: red;
+                width: 15px;
+                height: 15px;
+                display: block;
+                position: absolute;
+                right: 2px;
+                top: 4px;
+            }
+        }
+
+        .modal-info-wrapper {
+            padding: 30px 50px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 20px;
+
+            .modal-info-title {
+                @include montserrat-med-20-mblue;
+            }
+            
+            .modal-info-article {
+                border: 1px solid lightgray;
+                border-radius: 3px;
+                padding: 5px;
+                overflow: scroll;
+            }
+        
+            .modal-info-action {
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        
+    }
+}

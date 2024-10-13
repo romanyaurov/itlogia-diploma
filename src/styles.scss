@@ -1,0 +1,58 @@
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import 'assets/styles/fonts.scss';
+
+:root {
+    // Fonts vars
+    --main-font: 'Montserrat', sans-serif;
+    --second-font: 'Lora', serif;
+    // Colors vars
+    --primary-dark-blue-color: #071739;
+    --primary-medium-blue-color: #709FDC;
+    --primary-light-blue-color: #B9D5FD;
+    --primary-white-color: #FFFFFF;
+    --primary-grey-color: #D9D9D9;
+    --primary-light-grey-color: #BEBEBE;
+    --primary-dark-grey-color: #A8ABA7;
+    --pramiry-second-dark-blue-color: #1E1A2B;
+}
+
+@import 'assets/styles/typography.scss';
+@import 'assets/styles/elements.scss';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-medium-blue-color);
+}
+
+ul {
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h2 {
+    @include lora-38-mblue;
+    margin-bottom: 0;
+}
+
+.container {
+    width: 1240px;
+    margin: 0 auto;
+    padding-right: 0;
+    padding-left: 0;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

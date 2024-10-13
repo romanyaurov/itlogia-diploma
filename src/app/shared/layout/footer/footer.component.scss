@@ -1,0 +1,81 @@
+@import '../../../../assets/styles/typography.scss';
+
+:host {
+    display: block;
+    background-color: var(--primary-light-blue-color);
+}
+
+.footer {
+    padding: 40px 0 54px;
+
+    .footer__main {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        margin-bottom: 40px;
+
+        .footer__menu.menu .menu__items {
+            display: flex;
+            gap: 30px;
+    
+            .menu__link {
+                color: var(--primary-dark-blue-color);
+            }
+        }
+    }
+
+    .footer__info.info {
+        display: grid;
+        grid-template-columns: repeat(4, min-content auto);
+        gap: 60px;
+        margin-bottom: 6px;
+
+        .info__title {
+            @include montserrat-med-16-mblue;
+            margin-bottom: 10px;
+        }
+
+        .info__text {
+            @include montserrat-reg-16-dblue;
+        }
+
+        .info__address {
+            width: 253px;
+        }
+
+        .info__phone .info__action{
+            margin-top: 10px;
+        }
+
+        .info__phone {
+            a {
+                color: var(--primary-dark-blue-color);
+            }
+        }
+
+        .info__email .info__mail-link a {
+            @include montserrat-reg-14-dblue;
+        }
+
+        .info__social .info__links {
+            padding-top: 3px;
+
+            .info__icon {
+
+                svg {
+                    width: 18px;
+                    height: 18px;
+                    color: var(--primary-dark-blue-color);
+                }
+
+                &:not(:last-child) {
+                    margin-right: 18px;
+                }
+            }
+        }
+    }
+
+    .footer__rights {
+        @include montserrat-reg-16-mblue;
+    }
+}

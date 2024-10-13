@@ -1,0 +1,87 @@
+<div class="container">
+    <footer class="footer">
+        <div class="footer__main">
+            <div class="footer__logo">
+                <a routerLink="/">
+                    <img 
+                        src="/assets/svg/logo.svg" 
+                        alt="logotype"
+                    >
+                </a>
+            </div>
+            <nav class="footer__menu menu">
+                <ul class="menu__items">
+                    @for (item of menuItems; track item.name) {
+                        <li class="menu__item">
+                            @if (item.fragment) {
+                                <a 
+                                    class="menu__link"
+                                    routerLink="{{ item.link }}"
+                                    fragment="{{ item.fragment }}"
+                                >
+                                    {{ item.name }}
+                                </a>
+                            } @else {
+                                <a 
+                                    class="menu__link"
+                                    routerLink="{{ item.link }}"
+                                >
+                                    {{ item.name }}
+                                </a>
+                            }
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+        <div class="footer__info info">
+            <div class="info__address">
+                <div class="info__title">Адрес</div>
+                <div class="info__text">Пресненская наб., 12, Москва, Россия, 123317.</div>
+            </div>
+            <div class="info__phone">
+                <div class="info__title">Телефон</div>
+                <div class="info__text">
+                    <a href="tel:+74993431334">
+                        +7 (499) 343-13-34
+                    </a>
+                </div>
+                <div class="info__action">
+                    <button 
+                        class="common-btn btn-sm"
+                        (click)="modalService.open(
+                            modalTemplatesEnum.modalFormConsultation
+                        )"
+                        >
+                        Перезвоните мне
+                    </button>
+                </div>
+            </div>
+            <div class="info__email">
+                <div class="info__title">E-mail</div>
+                <div class="info__mail-link">
+                    <a href="mailto:info@itstorm.com">
+                        info&#64;itstorm.com
+                    </a>
+                </div>
+            </div>
+            <div class="info__social">
+                <div class="info__title">Мы в социальных сетях:</div>
+                <div class="info__links">
+                    <a class="info__icon" href="http://vk.com">
+                        <svg icon="vk-icon"></svg>
+                    </a>
+                    <a class="info__icon" href="http://facebook.com">
+                        <svg icon="fb-icon"></svg>
+                    </a>
+                    <a class="info__icon" href="http://instagram.com">
+                        <svg icon="inst-icon"></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__rights">
+            <span>&#9426; 2022. Все права защищены</span>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,54 @@
+@import '../../../../assets/styles/typography.scss';
+
+:host {
+    display: block;
+    width: 292px;
+    height: 571px;
+
+    .article-card {
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        &>* {
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+
+        .article-card__badge {
+            @include montserrat-reg-11-mblue;
+            background-color: #fff;
+            padding: 10px 18px;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            right: 9px;
+        }
+
+        .article-card__image {
+            width: 100%;
+            height: 291px;
+            border-radius: 5px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-bottom: 15px;
+        }
+
+        .article-card__title {
+            @include montserrat-med-20-mblue;
+            margin-bottom: 20px;
+        }
+
+        .article-card__description {
+            @include montserrat-reg-14-dblue;
+        }
+
+        .article-card__link {
+            @include montserrat-reg-14-mblue;
+            margin-top: auto;
+            text-decoration: underline;
+        }
+    }
+}

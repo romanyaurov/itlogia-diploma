@@ -1,0 +1,113 @@
+@import '../../../../assets/styles/typography.scss';
+
+.header {
+    padding: 40px 0;
+    display: grid;
+    grid-template-columns: 185px auto 145px auto;
+    font-weight: 500;
+    font-size: 16px;
+
+    &>* {
+        display: flex;
+        align-items: center;
+    }
+
+    .header__menu.menu .menu__items {
+        display: flex;
+        gap: 30px;
+
+        .menu__link {
+            color: var(--primary-dark-blue-color);
+            transition: .3s;
+
+            &.active {
+                color: var(--primary-medium-blue-color);
+            }
+        }
+    }
+
+    .header__phone a {
+        color: var(--primary-medium-blue-color);
+    }
+
+    .header__account.account {
+        position: relative;
+        justify-content: flex-end;
+
+        .account__link {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--primary-dark-blue-color);
+            cursor: pointer;
+        }
+
+        &:has(div.account__link) {
+            &:hover {
+                .account__logout {
+                    display: block;
+                }
+            }
+        }
+
+        .account__logout {
+            position: absolute;
+            bottom: 0;
+            transform: translateY(100%);
+            z-index: 99;
+            background-color: var(--primary-white-color);
+            border: 1px solid var(--primary-medium-blue-color);
+            border-radius: 3px;
+            display: none;
+
+            &::before {
+                content: '';
+                width: 0px;
+                height: 0px;
+                border-style: solid;
+                border-width: 0 10px 15px 10px;
+                border-color: transparent transparent var(--primary-medium-blue-color) transparent;
+                position: absolute;
+                transform: translateY(-100%) translateX(-50%);
+                left: 50%;
+                z-index: 1;
+            }
+
+            &::after {
+                content: '';
+                width: 0px;
+                height: 0px;
+                border-style: solid;
+                border-width: 0 9px 14px 9px;
+                border-color: transparent transparent var(--primary-white-color) transparent;
+                position: absolute;
+                transform: translateY(calc(-100% + 1px)) translateX(-50%);
+                top: 0;
+                left: 50%;
+                z-index: 10;
+            }
+
+            button {
+                border: none;
+                outline: none;
+                background-color: transparent;
+                cursor: pointer;
+                color: var(--primary-dark-blue-color);
+                display: flex;
+                padding: 10px 20px;
+                align-items: center;
+                gap: 10px;
+
+                svg {
+                    height: 18px;
+                    width: 24px;
+                }
+
+                span {
+                    @include montserrat-med-16-mblue;
+                    color: var(--primary-dark-blue-color);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,191 @@
+@import '../../../assets/styles/typography.scss';
+
+:host {
+    display: block;
+    padding-top: 80px;
+    padding-bottom: 120px;
+
+    .blog {
+        .blog__title {
+            margin-bottom: 40px;
+        }
+
+        .blog__filters {
+            display: flex;
+            margin-bottom: 40px;
+
+            .filters__active {
+                display: flex;
+                align-items: baseline;
+                gap: 10px;
+
+                .filters__item {
+                    border: 1px solid var(--primary-medium-blue-color);
+                    border-radius: 5px;
+                    padding: 8px 20px;
+                                        
+                    span {
+                        vertical-align: middle;
+                        margin-right: 8px;
+                        @include montserrat-reg-16-mblue;
+                    }
+
+                    svg {
+                        vertical-align: middle;
+                        width: 14px;
+                        height: 15px;
+                        color: var(--primary-medium-blue-color);
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .filters__menu {
+                margin-left: auto;
+                position: relative;
+                @include montserrat-reg-16-dblue;
+
+                .filters__action {
+                    display: flex;
+                    align-items: center;
+                    width: 148px;
+                    height: 45px;
+                    justify-content: space-between;
+                    cursor: pointer;
+                    border-top-left-radius: 5px;
+                    border-top-right-radius: 5px;
+                    border-top: 1px solid transparent;
+                    border-left: 1px solid transparent;
+                    border-right: 1px solid transparent;
+                    border-bottom: none;
+                    transition: .3s;
+
+                    svg {
+                        height: 8px;
+                        width: 16px;
+                        transition: transform .3s;
+                    }
+                }
+
+                .filters__options {
+                    width: 148px;
+                    background-color: var(--primary-white-color);
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                    transition: .3s;
+                    border-top: none;
+                    border-left: 1px solid transparent;
+                    border-right: 1px solid transparent;
+                    border-bottom: 1px solid transparent;
+                    position: absolute;
+                    z-index: 10;
+                    height: 0;
+                    overflow: hidden;
+                    right: 0;
+                    opacity: 0;
+                    transition: .3s;
+                    
+                    .filters__option {
+                        height: 31px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        color: var(--primary-light-grey-color);
+                        transition: color .2s;
+                        cursor: pointer;
+
+                        &:not(:last-child) {
+                            margin-bottom: 14px;
+                        }
+
+                        &:last-child {
+                            margin-bottom: 12px;
+                        }
+
+                        &:first-child {
+                            margin-top: 12px;
+                        }
+
+                        &.active {
+                            color: var(--primary-dark-blue-color);
+                        }
+
+                        span {
+                            &:last-child {
+                                font-size: 24px;
+                            }
+                        }
+                    }
+                }
+
+                &.open {
+                    .filters__action {
+                        width: 257px;
+                        padding-left: 23px;
+                        padding-right: 19px;
+                        background-color: var(--primary-light-blue-color);
+
+                        svg {
+                            transform: rotateZ(-180deg);
+                        }
+                    }
+
+                    .filters__options {
+                        width: 257px;
+                        padding-left: 23px;
+                        padding-right: 19px;
+                        border-left-color: var(--primary-light-blue-color);
+                        border-right-color: var(--primary-light-blue-color);
+                        border-bottom-color: var(--primary-light-blue-color);
+                        height: 235px;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        .blog__items {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px 24px;
+        }
+
+        .blog__pagination.pagination {
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+
+            .pagination__arrow {
+                width: 10px;
+                height: 18px;
+                color: var(--primary-light-blue-color);
+                cursor: pointer;
+                transition: .3s;
+
+                &.disabled {
+                    color: var(--primary-grey-color);
+                    cursor: default;
+                }
+            }
+            
+            .pagination__pages {
+                .pagination__page {
+                    @include montserrat-reg-20-dblue;
+                    cursor: pointer;
+                    transition: .3s;
+
+                    &:not(:last-child) {
+                        margin-right: 40px;
+                    }
+
+                    &.active {
+                        color: var(--primary-light-blue-color);
+                        cursor: default;
+                    }
+                }
+            }
+        }
+    }
+}

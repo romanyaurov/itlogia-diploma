@@ -1,0 +1,82 @@
+<div class="blog">
+    <h2 class="blog__title">
+        Блог
+    </h2>
+    <div class="blog__filters filters">
+        <div class="filters__active">
+            @for (activeFilter of getActiveFilters(); track activeFilter.name) {
+                <div class="filters__item">
+                    <span>{{ activeFilter.name }}</span>
+                    <svg 
+                        icon="cross-icon"
+                        (click)="toggleActiveFilter(activeFilter)"
+                    >
+                    </svg>
+                </div>
+            }
+        </div>
+        <div
+            class="filters__menu"
+            [class.open]="isFiltersOpen()"
+            #filtersMenu
+        >
+            <div 
+                class="filters__action"
+                (click)="isFiltersOpen.set(!isFiltersOpen())"
+            >
+                <span>Фильтр</span>
+                <svg icon="chevron-simple"></svg>
+            </div>
+            <div class="filters__options">
+                @for (category of categories; track category.name) {
+                    <div 
+                        class="filters__option"
+                        [class.active]="category.isChosen"
+                        (click)="toggleActiveFilter(category)"
+                    >
+                        <span>{{ category.name }}</span>
+                        @if (category.isChosen) {
+                            <span>+</span>
+                        } @else {
+                            <span>-</span>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="blog__items">
+        @for (article of articlesItems; track article.id) {
+            <app-article-card [article]="article"></app-article-card>
+        }
+    </div>
+    @if (totalPagesCount && totalPagesCount > 1) {
+        <div class="blog__pagination pagination">
+            <svg 
+                class="pagination__arrow"
+                [class.disabled]="currentPage === 1"
+                icon="chevron-left"
+                (click)="changePage('prev', $event)"
+            >
+            </svg>
+            <div class="pagination__pages">
+                @for (_ of [].constructor(totalPagesCount); track $index) {
+                    <span
+                        class="pagination__page"
+                        [class.active]="$index + 1 === currentPage"
+                        (click)="changePage($index + 1, $event)"
+                    >
+                        {{ $index + 1 }}
+                    </span>
+                }
+            </div>
+            <svg 
+                class="pagination__arrow"
+                [class.disabled]="currentPage === totalPagesCount"  
+                icon="chevron-right"
+                (click)="changePage('next', $event)"
+            >
+            </svg>
+        </div>
+    }
+</div>

@@ -1,0 +1,115 @@
+.common-btn {
+    display: inline-block;
+    background-color: var(--primary-medium-blue-color);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-family: var(--main-font);
+    line-height: 130%;
+    color: var(--primary-white-color);
+    cursor: pointer;
+    transition: .3s;
+
+    &.btn-sm {
+        padding: 10px 20px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    &.btn-l {
+        padding: 15px 40px;
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    &.btn-100 {
+        width: 100%;
+    }
+
+    &:disabled {
+        // background-color: #709fdc;
+        // color: lightgrey;
+        opacity: .5;
+        cursor: not-allowed;
+    }
+}
+
+
+.common-input {
+    border: 1px solid var(--primary-medium-blue-color);
+    border-radius: 3px;
+    padding: 20px;
+    width: 100%;
+    height: 53px;
+    font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+    position: relative;
+    z-index: 2;
+    background-color: transparent;
+
+    &~svg {
+        &:not(.form-eye) {
+            z-index: 1;
+        }
+    }
+
+    &::placeholder {
+        color: var(--primary-dark-grey-color);
+    }
+
+    &.invalid-input {
+        color: red;
+        border-color: red;
+        &::placeholder {
+            color: red;
+        }
+        &:focus-visible {
+            outline-color: red;
+        }
+        &~svg {
+            color: red;
+        }
+    }
+
+    &.ng-valid {
+        color: green;
+        border-color: green;
+        
+        &:focus-visible {
+            outline-color: green;
+        }
+        &~svg {
+            color: green;
+        }
+    }
+
+    &:disabled {
+        border-color: lightgray;
+        color: gray;
+        cursor: not-allowed;
+        background-color: transparent;
+    }
+}
+
+.common-select {
+    appearance: none;
+    border: 1px solid var(--primary-medium-blue-color);
+    border-radius: 3px;
+    padding: 17px 20px;
+    width: 100%;
+    height: 53px;
+    font-family: var(--main-font);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--primary-medium-blue-color);
+
+    &:disabled {
+        border-color: lightgray;
+        color: gray;
+        cursor: not-allowed;
+    }
+}

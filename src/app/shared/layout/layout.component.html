@@ -1,0 +1,12 @@
+<app-header
+    [menuItems]="menuItems"
+></app-header>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+<app-footer
+    [menuItems]="menuItems"    
+></app-footer>
+@if (isModalOpen) {
+    <app-modal></app-modal>
+}

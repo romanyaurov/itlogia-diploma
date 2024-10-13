@@ -1,0 +1,31 @@
+<div class="service">
+    <div 
+        class="service__image"
+        [style.background-image]="service.img | staticImagePath"
+    >
+    </div>
+    <div class="service__title">
+        {{ service.title }}
+    </div>
+    <div class="service__description">
+        {{ service.description }}
+    </div>
+    <div class="service__info">
+        <div class="service__price">
+            {{ service.price | servicePriceFormat }}
+        </div>
+        <div class="service__action">
+            <button 
+                class="common-btn btn-l"
+                (click)="modalService.open(
+                    modalTemplates.modalFormOrder,
+                    { 
+                        orderType: service.title 
+                    }
+                )"
+            >
+                Подробнее
+            </button>
+        </div>
+    </div>
+</div>

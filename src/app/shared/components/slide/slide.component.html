@@ -1,0 +1,29 @@
+<div class="slide-content">
+    <div class="slide-pretitle">
+        {{ slide.preTitle }}
+    </div>
+    <div 
+        class="slide-title"
+        [innerHTML]="slide.title"
+    >
+    </div>
+    @if (slide.subTitle) {
+        <div 
+            class="slide-subtitle"
+            [innerHTML]="slide.subTitle"
+        >
+        </div>
+    }
+    <div class="slide-action">
+        <button 
+            class="common-btn btn-l"
+        >
+            Подробнее
+        </button>
+    </div>
+</div>
+<div 
+    class="slide-background"
+    [style.background-image]="slide.img | staticImagePath"
+>
+</div>

@@ -1,0 +1,69 @@
+@import '../../../../assets/styles/typography.scss';
+
+:host {
+    display: block;
+    height: 500px;
+    padding: 100px 80px 0;
+    background-color: transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.slide-content {
+    max-width: 610px;
+
+    .slide-pretitle {
+        @include montserrat-bold-12-blue-ls04-ttu;
+    }
+
+    .slide-title {
+        @include lora-50-white;
+
+        &::ng-deep span {
+            color: var(--primary-medium-blue-color);
+        }
+    }
+
+    &:has(.slide-subtitle) {
+        .slide-title {
+            margin-bottom: 20px;
+        }
+    }
+
+    &:not(:has(.slide-subtitle)) {
+        .slide-title {
+            margin-bottom: 40px;
+        }
+    }
+
+    .slide-subtitle {
+        @include montserrat-reg-24-white;
+        margin-bottom: 50px;
+    }
+}
+
+.slide-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+    background-color: var(--primary-grey-color);
+    z-index: -2;
+
+    &::before {
+        content: '';
+        position: absolute;
+        --circle-diam: 1404px;
+        height: var(--circle-diam);
+        width: var(--circle-diam);
+        background-color: var(--primary-light-blue-color);
+        border-radius: 50%;
+        z-index: -1;
+        left: calc(0px - var(--circle-diam) / 2);
+        top: calc(0px - var(--circle-diam) / 2);
+    }
+}

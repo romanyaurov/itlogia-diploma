@@ -1,0 +1,72 @@
+<div class="modal-title">
+    Заявка на услугу
+</div>
+<form 
+    class="modal-form"
+    [formGroup]="orderForm"
+    (ngSubmit)="onSubmit()"
+>
+    <label class="modal-form__item">
+        <select
+            class="common-select"
+            formControlName="{{ requestFormFields.service }}"
+        >
+            <option value="{{ orderServices.siteCreation }}">
+                {{ orderServices.siteCreation }}
+            </option>
+            <option value="{{ orderServices.promotion }}">
+                {{ orderServices.promotion }}
+            </option>
+            <option value="{{ orderServices.advertisement }}">
+                {{ orderServices.advertisement }}
+            </option>
+            <option value="{{ orderServices.copywriting }}">
+                {{ orderServices.copywriting }}
+            </option>
+        </select>
+    </label>
+    <label class="modal-form__item">
+        <input 
+            type="text"
+            class="common-input"
+            placeholder="Ваше имя"
+            formControlName="{{ requestFormFields.name }}"
+            [class.invalid-input]="orderForm.get(requestFormFields.name)?.invalid &&
+            (orderForm.get(requestFormFields.name)?.touched || orderForm.get(requestFormFields.name)?.dirty)"
+        >
+        @if (orderForm.get(requestFormFields.name)?.touched || orderForm.get(requestFormFields.name)?.dirty) {
+            <svg
+                class="modal-form__icon"
+                [icon]="orderForm.get(requestFormFields.name)?.invalid ? 'error-icon' : 'checked-icon'"
+                [style.color]="orderForm.get(requestFormFields.name)?.invalid ? 'red' : 'green'"
+            >
+            </svg>
+        }
+    </label>
+    <label class="modal-form__item">
+        <input 
+            type="text"
+            class="common-input"
+            placeholder="Ваш номер телефона"
+            formControlName="phone"
+            [class.invalid-input]="orderForm.get(requestFormFields.phone)?.invalid &&
+            (orderForm.get(requestFormFields.phone)?.touched || orderForm.get(requestFormFields.phone)?.dirty)"
+            appPhoneMask
+        >
+        @if (orderForm.get(requestFormFields.phone)?.touched || orderForm.get(requestFormFields.phone)?.dirty) {
+            <svg
+                class="modal-form__icon"
+                [icon]="orderForm.get(requestFormFields.phone)?.invalid ? 'error-icon' : 'checked-icon'"
+                [style.color]="orderForm.get(requestFormFields.phone)?.invalid ? 'red' : 'green'"
+            >
+            </svg>
+        }
+    </label>
+    <button
+        type="submit"
+        class="common-btn btn-l btn-100"
+        [disabled]="orderForm.invalid"
+    >
+        Оставить заявку
+    </button>
+</form>

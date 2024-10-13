@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="header">
+        <div class="header__logo">
+            <a routerLink="/">
+                <img 
+                    src="/assets/svg/logo.svg" 
+                    alt="logotype"
+                >
+            </a>
+        </div>
+        <nav class="header__menu menu">
+            <ul class="menu__items">
+                @for (item of menuItems; track item.name) {
+                    <li class="menu__item">
+                        @if (item.fragment) {
+                            <a 
+                                class="menu__link"
+                                routerLink="{{ item.link }}"
+                                fragment="{{ item.fragment }}"
+                            >
+                                {{ item.name }}
+                            </a>
+                        } @else {
+                            <a 
+                                class="menu__link"
+                                routerLink="{{ item.link }}"
+                                routerLinkActive="active"
+                            >
+                                {{ item.name }}
+                            </a>
+                        }
+                    </li>
+                }
+            </ul>
+        </nav>
+        <div class="header__phone">
+            <a href="tel:+74993431334">+7 (499) 343-13-34</a>
+        </div>
+        <div class="header__account account">
+            @if (authService.isAuth) {
+                <div class="account__link">
+                    <img
+                        class="account__icon"
+                        src="/assets/svg/user-icon.svg" 
+                        alt="user icon"
+                    >
+                    <span class="account__text">
+                        Привет, {{ authService.userName }}!
+                    </span>
+                </div>
+                <div 
+                    class="account__logout"
+                    (click)="logout()"
+                >
+                    <button>
+                        <svg icon="logout-icon"></svg>
+                        <span>Выход</span>
+                    </button>
+                </div>
+            } @else {
+                <a 
+                    class="account__link"
+                    routerLink="/signin"
+                >
+                    <img
+                        class="account__icon"
+                        src="/assets/svg/user-icon.svg" 
+                        alt="user icon"
+                    >
+                    <span class="account__text">Войти</span>
+                </a>
+            }
+        </div>
+    </div>
+</div>

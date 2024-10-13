@@ -1,0 +1,134 @@
+<div class="home">
+    <ngb-carousel class="home__slider">
+        @for (slide of slides; track slide.title) {
+        <ng-template ngbSlide>
+            <app-slide [slide]="slide"></app-slide>
+        </ng-template>
+        }
+    </ngb-carousel>
+    <section class="home__services services" id="services">
+        <h2 class="services__title">
+            Услуги, которые мы предлагаем
+        </h2>
+        <div class="services__items">
+            @for (service of services.items; track service.title) {
+            <app-service-card [service]="service"></app-service-card>
+            }
+        </div>
+    </section>
+    <section class="home__about about" id="about">
+        <div 
+            class="about__image"
+            [style.background-image]="'about-image' | staticImagePath"
+        >
+        </div>
+        <div class="about__content">
+            <h2 class="about__title">
+                Кто мы и чем мы занимаемся?
+            </h2>
+            <p class="about__description">
+                <span>АйтиШторм</span> — это ваш помощник №1 при решении таких вопросов, как продвижение в сети, разработка сайтов
+                для бизнеса и личного бренда, сторисмейкинг, копирайтинг, маркетинг, разработка визуальной концепции и
+                создание инфопродуктов. Компания была основана в 2019 году и за всё это время смогла выйти в ТОП-10
+                агенств, предлагающих услуги продвижения в сети.
+            </p>
+            <div class="about__advantages advantsges">
+                <div class="advantages__title">
+                    Наши преимущества
+                </div>
+                <div class="advantages__items">
+                    @for (advantage of advantagesData; track advantage; let i = $index) {
+                    <div class="advantages__item">
+                        <div class="advantages__number">{{ i + 1 }}</div>
+                        <div class="advantages__text">
+                            <span>{{ advantage.caption }}</span> {{ advantage.text }}
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    @if (popularArticles) {
+        <section class="home__articles articles">
+            <h2 class="articles__title">
+                Популярные статьи из блога
+            </h2>
+            <div class="articles__items">
+                @for (article of popularArticles; track article) {
+                    <app-article-card [article]="article"></app-article-card>
+                }
+            </div>
+            <div class="articles__link">
+                <a routerLink="/blog">
+                    <span>Перейти в блог</span>
+                    <svg [icon]="'chevron-right'"></svg>
+                </a>
+            </div>
+        </section>
+    }
+    @if (reviews) {
+        <section class="home__reviews reviews" id="reviews">
+            <h2 class="reviews__title">
+                Отзывы о нашей работе
+            </h2>
+            <owl-carousel-o [options]="customOptions">
+                @for (review of reviews; track review) {
+                    <ng-template carouselSlide>
+                        <app-review-card [review]="review"></app-review-card>
+                    </ng-template>  
+                }
+            </owl-carousel-o>
+        </section>
+    }
+    <section class="home__contacts contacts" id="contacts">
+        <div class="contacts__map">
+            <iframe 
+                src="https://yandex.ru/map-widget/v1/?um=constructor%3A3b1ce44f6c144504b3b52c283ef885ba8d13261a2c318242f57e315be51a1292&amp;source=constructor"
+                width="607"
+                height="438"
+                frameborder="0"
+            >
+            </iframe>
+        </div>
+        <div class="contacts__content">
+            <h2 class="contacts__title">
+                Контакты
+            </h2>
+            <div class="contacts__items">
+                <div class="contacts__item">
+                    <div class="contacts__article">Адрес</div>
+                    <div class="contacts__info">
+                        Главный офис компании АйтиШторм находится по адресу Пресненская наб., 12, Москва, Россия, 123317.
+                    </div>
+                </div>
+                <div class="contacts__item">
+                    <div class="contacts__article">Телефон</div>
+                    <div class="contacts__info">
+                        <a href="tel:+74993431334">+7 (499) 343-13-34</a>
+                    </div>
+                </div>
+                <div class="contacts__item">
+                    <div class="contacts__article">Электронный адрес</div>
+                    <div class="contacts__info">
+                        <a href="mailto:info@itstorm.com">info&#64;itstorm.com</a>
+                    </div>
+                </div>
+                <div class="contacts__item">
+                    <div class="contacts__article">Мы в социальных сетях</div>
+                    <div class="contacts__links">
+                        <a href="http://vk.com">
+                            <svg icon="vk-icon"></svg>
+                        </a>
+                        <a href="http://facebook.com">
+                            <svg icon="fb-icon"></svg>
+                        </a>
+                        <a href="http://instagram.com">
+                            <svg icon="inst-icon"></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

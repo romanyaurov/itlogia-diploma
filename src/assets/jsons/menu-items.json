@@ -1,0 +1,33 @@
+{
+    "items": [
+        {
+            "name": "Услуги",
+            "link": "/",
+            "fragment": "services"
+        },
+        {
+            "name": "О нас",
+            "link": "/",
+            "fragment": "about"
+
+        },
+        {
+            "name": "Статьи",
+            "link": "/blog",
+            "fragment": ""
+
+        },
+        {
+            "name": "Отзывы",
+            "link": "/",
+            "fragment": "reviews"
+
+        },
+        {
+            "name": "Контакты",
+            "link": "/",
+            "fragment": "contacts"
+
+        }
+    ]
+}

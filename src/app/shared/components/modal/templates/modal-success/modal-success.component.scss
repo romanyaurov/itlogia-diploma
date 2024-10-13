@@ -1,0 +1,18 @@
+@import '../../../../../../assets/styles/typography.scss';
+
+:host {
+    display: block;
+    padding: 163px 140px 0;
+}
+
+.modal-description {
+    @include montserrat-med-14-sdblue;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.modal-action {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
