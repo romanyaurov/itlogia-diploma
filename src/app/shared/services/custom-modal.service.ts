@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
-import { catchError, Observable, Subject, tap, throwError } from 'rxjs';
+import { Injectable, signal, WritableSignal } from '@angular/core';
+import { catchError, map, Observable, Subject, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ConsultationRequestType } from 'src/types/consultation-request.type';
 import { DefaultResponseType } from 'src/types/default-response.type';
@@ -9,6 +9,7 @@ import { OrderRequestType } from 'src/types/order-request.type';
 import { OrderServicesEnum } from 'src/types/order-services.enum';
 import { RequestFormFields } from 'src/types/request-form-fields.enum';
 import { RequestTypesEnum } from 'src/types/request-types.enum';
+import { TypeCheckingUtil } from '../utils/type-checking.util';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,6 @@ import { RequestTypesEnum } from 'src/types/request-types.enum';
 export class CustomModalService {
 
   /* Attributes */
-  // DI
-  private http: HttpClient = inject(HttpClient);
   // State Subject
   private isModalOpen: boolean = false;
   public isModalOpen$: Subject<boolean> = new Subject<boolean>();
@@ -26,6 +25,11 @@ export class CustomModalService {
     signal<ModalTemplatesEnum | null>(null);
   public modalOrderType: WritableSignal<OrderServicesEnum | null> =
     signal<OrderServicesEnum | null>(null);
+
+  constructor(
+    private http: HttpClient,
+    private typeChecker: TypeCheckingUtil
+  ) { }
 
   /* Methods */
   public open(
@@ -60,16 +64,17 @@ export class CustomModalService {
       `${environment.api}/requests`,
       this.modifyRequestBody(data)
     ).pipe(
-      tap((res: DefaultResponseType) => {
+      map((res: DefaultResponseType) => {
         if (res.error) {
-          throwError(() => res.message)
+          throw new Error(res.message);
         }
+        return res;
       }),
       catchError((err: HttpErrorResponse) => {
         if (err.status === 400) {
-          throw err.error.message;
+          return throwError(() => err.error.message);
         } else {
-          throw 'Неизвестная ошибка';
+          return throwError(() => 'Неизвестная ошибка');
         }
       })
     )
@@ -82,7 +87,7 @@ export class CustomModalService {
   } | OrderRequestType & {
     [RequestFormFields.type]: RequestTypesEnum.order
   } {
-    if (this.isOrderRequestType(data)) {
+    if (this.typeChecker.isOrderRequestType(data)) {
       return {
         ...data,
         ...{[RequestFormFields.type]: RequestTypesEnum.order}
@@ -93,24 +98,5 @@ export class CustomModalService {
         ...{[RequestFormFields.type]: RequestTypesEnum.consultation}
       };
     }
-  }
-
-  private isConsultationRequestType(obj: any): obj is ConsultationRequestType {
-    return (
-      typeof obj === 'object' &&
-      obj !== null &&
-      typeof obj[RequestFormFields.name] === 'string' &&
-      typeof obj[RequestFormFields.phone] === 'string'
-    )
-  }
-
-  private isOrderRequestType(obj: any): obj is OrderRequestType {
-    return (
-      typeof obj === 'object' &&
-      obj !== null &&
-      typeof obj[RequestFormFields.name] === 'string' &&
-      typeof obj[RequestFormFields.phone] === 'string' &&
-      typeof obj[RequestFormFields.service] === 'string'
-    )
   }
 }

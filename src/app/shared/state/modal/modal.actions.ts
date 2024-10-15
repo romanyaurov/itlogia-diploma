@@ -1,10 +1,14 @@
 import { createAction, props } from "@ngrx/store";
+import { RequestFormFields } from "src/types/request-form-fields.enum";
 
-export const saveFormData = createAction(
+export const saveModalFormData = createAction(
     '[Form] Save Form Data',
-    props<{ formData: any }>()
+    props<{ modalFormData: {
+        [RequestFormFields.name]: string,
+        [RequestFormFields.phone]: string
+    }}>()
 );
 
-export const clearFormData = createAction(
+export const clearModalFormData = createAction(
     '[Form] Clear Form Data'
 );

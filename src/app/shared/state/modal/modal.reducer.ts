@@ -1,22 +1,26 @@
 import { createReducer, on } from "@ngrx/store";
-import { clearFormData, saveFormData } from "./modal.actions";
+import { clearModalFormData, saveModalFormData } from "./modal.actions";
+import { RequestFormFields } from "src/types/request-form-fields.enum";
 
-export interface FormState {
-    formData: any;
+export interface ModalFormState {
+    modalFormData: {
+        [RequestFormFields.name]: string,
+        [RequestFormFields.phone]: string
+    } | null;
 }
 
-export const initialState: FormState = {
-    formData: null,
+export const initialState: ModalFormState = {
+    modalFormData: null,
 }
 
-export const formReducer = createReducer(
+export const modalFormReducer = createReducer(
     initialState,
-    on(saveFormData, (state, { formData }) => ({
+    on(saveModalFormData, (state, { modalFormData }) => ({
         ...state,
-        formData
+        modalFormData
     })),
-    on(clearFormData, (state) => ({
+    on(clearModalFormData, (state) => ({
         ...state,
-        formData: null
+        modalFormData: null
     }))
 )

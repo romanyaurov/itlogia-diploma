@@ -8,7 +8,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { authInterceptor } from './core/auth/auth.interceptor';
 import { StoreModule } from '@ngrx/store';
-import { formReducer } from './shared/state/modal/modal.reducer';
+import { modalFormReducer } from './shared/state/modal/modal.reducer';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { formReducer } from './shared/state/modal/modal.reducer';
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({ form: formReducer }),
+    StoreModule.forRoot({ modalForm: modalFormReducer }),
     MatSnackBarModule,
     AppRoutingModule
   ],

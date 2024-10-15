@@ -11,7 +11,7 @@ import { TokensKeysEnum } from 'src/types/tokens-keys.enum';
 import { UserInfoKeysEnum } from 'src/types/user-info-keys.enum';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SignupPayloadRequestType } from 'src/types/signup-payload-request.type';
-import { TypeCheckingService } from 'src/app/shared/services/type-checking.service';
+import { TypeCheckingUtil } from 'src/app/shared/utils/type-checking.util'; 
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class AuthService {
     private http: HttpClient,
     private cookieService: CookieService,
     private snackBar: MatSnackBar,
-    private typeChecker: TypeCheckingService
+    private typeChecker: TypeCheckingUtil
   ) { }
 
   // isAuth getter

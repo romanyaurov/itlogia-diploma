@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, switchMap, tap } from 'rxjs';
+import { catchError, map, Observable, switchMap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ArticleType } from 'src/types/article.type';
 import { DetailedArticleType } from 'src/types/detailed-article.type';
@@ -17,9 +17,8 @@ export class ArticlesService {
   public getPopularArticles(): Observable<ArticleType[]> {
     return this.http.get<ArticleType[]>(`${environment.api}/articles/top`)
       .pipe(
-        catchError(
-          (err: HttpErrorResponse) => {
-            throw 'Ошибка запроса популярных статей.'
+        catchError(() => {
+            return throwError(() => 'Ошибка запроса популярных статей.');
           }
         )
       )
@@ -39,9 +38,8 @@ export class ArticlesService {
           }))
         )
       }),
-      catchError(
-        (err: HttpErrorResponse) => {
-          throw 'Ошибка при запросе статьи.'
+      catchError(() => {
+          return throwError(() => 'Ошибка при запросе статьи.');
         }
       )
     )

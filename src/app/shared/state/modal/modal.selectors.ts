@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { FormState } from "./modal.reducer";
+import { ModalFormState } from "./modal.reducer";
 
-export const selectFormState = createFeatureSelector<FormState>('form');
+export const selectModalFormState = createFeatureSelector<ModalFormState>('modalForm');
 
-export const selectFormData = createSelector(
-    selectFormState,
-    (state: FormState) => state.formData
-);
+export const selectModalFormData = createSelector(
+    selectModalFormState,
+    (state: ModalFormState) => state.modalFormData
+)

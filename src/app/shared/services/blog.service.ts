@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ArticleCategoryType } from 'src/types/article-category.type';
 import { ArticlesType } from 'src/types/articles.type';
@@ -35,8 +35,8 @@ export class BlogService {
     return this.http.get<ArticlesType>(
       `${environment.api}/articles${queryParams ? queryParams : ''}`
     ).pipe(
-      catchError((err: HttpErrorResponse) => {
-        throw 'Упс, ошибка при запросе статей.'
+      catchError(() => {
+        return throwError(() => 'Упс, ошибка при запросе статей.')
       })
     );
   }
@@ -45,8 +45,8 @@ export class BlogService {
     return this.http.get<ArticleCategoryType[]>(
       `${environment.api}/categories`
     ).pipe(
-      catchError((err: HttpErrorResponse) => {
-        throw 'Упс, ошибка при запросе категорий.'
+      catchError(() => {
+        return throwError(() => 'Упс, ошибка при запросе категорий.')
       })
     )
   }

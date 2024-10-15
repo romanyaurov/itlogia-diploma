@@ -4,12 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { ArticlesService } from 'src/app/shared/services/articles.service';
 import { CommentsService } from 'src/app/shared/services/comments.service';
-import { TypeCheckingService } from 'src/app/shared/services/type-checking.service';
 import { ArticleCommentsActionsType } from 'src/types/article-comments-actions.type';
 import { ArticleType } from 'src/types/article.type';
 import { CommentActionsEnum } from 'src/types/comment-actions.enum';
-import { CommentType } from 'src/types/comment.type';
-import { DefaultResponseType } from 'src/types/default-response.type';
 import { DetailedArticleType } from 'src/types/detailed-article.type';
 import { GetCommentsResponseType } from 'src/types/get-comments-response.type';
 
@@ -32,7 +29,6 @@ export class ArticleComponent implements OnInit {
     private snackBar: MatSnackBar,
     protected authService: AuthService,
     private commentsService: CommentsService,
-    private typeChecker: TypeCheckingService
   ) { }
 
   ngOnInit(): void {
@@ -45,18 +41,14 @@ export class ArticleComponent implements OnInit {
             if (this.authService.isAuth) {
               this.commentsService.getCommentsAction(this.article.id)
                 .subscribe({
-                  next: (
-                    res: ArticleCommentsActionsType[] | DefaultResponseType
-                  ) => {
-                    if (!this.typeChecker.isDefaultResponseType(res)) {
-                      res.forEach((comment: ArticleCommentsActionsType) => {
-                        const foundComment = this.article.comments
-                          .find(item => item.id === comment.comment);
-                        if (foundComment) {
-                          foundComment.action = comment.action;
-                        }
-                      })
-                    }
+                  next: (res: ArticleCommentsActionsType[]) => {
+                    res.forEach((comment: ArticleCommentsActionsType) => {
+                      const foundComment = this.article.comments
+                        .find(item => item.id === comment.comment);
+                      if (foundComment) {
+                        foundComment.action = comment.action;
+                      }
+                    })
                   },
                   error: (err: string) => { this.snackBar.open(err); }
                 })
@@ -73,11 +65,9 @@ export class ArticleComponent implements OnInit {
         this.commentInputValue,
         this.article.id
       ).subscribe({
-        next: (res: GetCommentsResponseType | DefaultResponseType) => {
-          if (this.commentsService.isGetCommentsResponseType(res)) {
-            this.article.comments = res.comments.slice(0, 3);
-            this.article.commentsCount = res.allCount;
-          }
+        next: (res: GetCommentsResponseType) => {
+          this.article.comments = res.comments.slice(0, 3);
+          this.article.commentsCount = res.allCount;
           this.commentInputValue = '';
         },
         error: (err: string) => {
@@ -92,11 +82,8 @@ export class ArticleComponent implements OnInit {
       this.article.id,
       this.article.comments.length
     ).subscribe({
-      next: (res: GetCommentsResponseType | DefaultResponseType) => {
-        if (this.commentsService.isGetCommentsResponseType(res)) {
-          this.article.comments.push(...res.comments);
-          console.log(this.article.comments.length);
-        }
+      next: (res: GetCommentsResponseType) => {
+        this.article.comments.push(...res.comments);
       }
     })
   }

@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { DefaultResponseType } from 'src/types/default-response.type';
 import { LoginResponseType } from 'src/types/login-response.type';
+import { OrderRequestType } from 'src/types/order-request.type';
+import { RequestFormFields } from 'src/types/request-form-fields.enum';
 import { SignupFieldsEnum } from 'src/types/signup-fields.enum';
 import { SignupPayloadRequestType } from 'src/types/signup-payload-request.type';
 import { TokensKeysEnum } from 'src/types/tokens-keys.enum';
-import { UserInfoKeysEnum } from 'src/types/user-info-keys.enum';
-import { UserInfoResponseType } from 'src/types/user-info-response.type';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TypeCheckingService {
+export class TypeCheckingUtil {
 
   public isLoginResponseType(obj: any): obj is LoginResponseType {
     return (
@@ -20,16 +20,6 @@ export class TypeCheckingService {
       typeof obj[TokensKeysEnum.refreshToken] === 'string' &&
       typeof obj[TokensKeysEnum.userId] === 'string'
     );
-  }
-
-  public isUserUnfoResponseType(obj: any): obj is UserInfoResponseType {
-    return (
-      typeof obj === 'object' &&
-      obj !== null &&
-      typeof obj[UserInfoKeysEnum.id] === 'string' &&
-      typeof obj[UserInfoKeysEnum.name] === 'string' &&
-      typeof obj[UserInfoKeysEnum.email] === 'string'
-    )
   }
 
   public isSignupPayloadRequestType(obj: any): obj is SignupPayloadRequestType {
@@ -48,6 +38,16 @@ export class TypeCheckingService {
       obj !== null &&
       typeof obj.error === 'boolean' &&
       typeof obj.message === 'string'
+    )
+  }
+
+  public isOrderRequestType(obj: any): obj is OrderRequestType {
+    return (
+      typeof obj === 'object' &&
+      obj !== null &&
+      typeof obj[RequestFormFields.name] === 'string' &&
+      typeof obj[RequestFormFields.phone] === 'string' &&
+      typeof obj[RequestFormFields.service] === 'string'
     )
   }
 }

@@ -1,58 +1,60 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, filter, map, Observable, switchMap, tap, throwError } from 'rxjs';
-import { AuthService } from 'src/app/core/auth/auth.service';
+import { catchError, map, Observable, switchMap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ArticleCommentsActionsType } from 'src/types/article-comments-actions.type';
 import { CommentActionsEnum } from 'src/types/comment-actions.enum';
-import { CommentType } from 'src/types/comment.type';
 import { DefaultResponseType } from 'src/types/default-response.type';
 import { GetCommentsResponseType } from 'src/types/get-comments-response.type';
-import { TypeCheckingService } from './type-checking.service';
+import { TypeCheckingUtil } from '../utils/type-checking.util';
 
 @Injectable()
 export class CommentsService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
-    private typeChecker: TypeCheckingService
+    private typeChecker: TypeCheckingUtil
   ) { }
 
   public getComments(
     article: string,
     offset?: number
-  ): Observable<GetCommentsResponseType | DefaultResponseType> {
+  ): Observable<GetCommentsResponseType> {
     return this.http.get<GetCommentsResponseType | DefaultResponseType>(
       `${environment.api}/comments?offset=${offset ? offset : 0}&article=${article}`
     ).pipe(
-      tap((res: GetCommentsResponseType | DefaultResponseType) => {
+      map((res: GetCommentsResponseType | DefaultResponseType): GetCommentsResponseType => {
         if (this.typeChecker.isDefaultResponseType(res)) {
-          res.error ? throwError(() => res.message) : null;
+          throw new Error(res.message);
         }
+        return res;
       }),
       catchError((err: HttpErrorResponse) => {
-        throw err.error.message;
+        return throwError(() => err.error.message);
       })
     )
   }
 
   public getCommentsAction(
     articleId: string
-  ): Observable<ArticleCommentsActionsType[] | DefaultResponseType> {
+  ): Observable<ArticleCommentsActionsType[]> {
     return this.http.get<ArticleCommentsActionsType[] | DefaultResponseType>(
       `${environment.api}/comments/article-comment-actions?articleId=${articleId}`
     ).pipe(
-      tap(res => {
+      map(res => {
         if (this.typeChecker.isDefaultResponseType(res)) {
-          if (res.error)
-          throwError(() => res.message)
+          throw new Error(res.message);
         }
+        return res;
       }),
       catchError((err: HttpErrorResponse) => {
-        throw 'Ошибка при запросе действий пользователя.'
+        if (err.status === 400) {
+          return throwError(() => err.error.message);
+        } else {
+          return throwError(() => 'Ошибка при запросе действий пользователя.');
+        }
       })
-    )
+    );
   }
 
   public postCommentAction(
@@ -82,31 +84,22 @@ export class CommentsService {
   public postComment(
     text: string,
     article: string
-  ): Observable<GetCommentsResponseType | DefaultResponseType> {
+  ): Observable<GetCommentsResponseType> {
     return this.http.post<DefaultResponseType>(
       `${environment.api}/comments`,
       { text, article }
     ).pipe(
-      tap((res: DefaultResponseType) => {
+      map((res: DefaultResponseType) => {
         if (res.error) {
-          throwError(() => res.message)
+          throw new Error(res.message);
         }
       }),
-      switchMap((): Observable<GetCommentsResponseType | DefaultResponseType> => {
+      switchMap((): Observable<GetCommentsResponseType> => {
         return this.getComments(article);
       }),
-      catchError((err: HttpErrorResponse) => {
-        throw 'Упс, произошла ошибка при добавлении комментария.'
+      catchError(() => {
+        return throwError(() => 'Упс, произошла ошибка при добавлении комментария.')
       })
-    )
-  }
-
-  public isGetCommentsResponseType(obj: any): obj is GetCommentsResponseType {
-    return (
-      typeof obj === 'object' &&
-      obj !== null &&
-      typeof obj.allCount === 'number' &&
-      typeof obj.comments === 'object'
     )
   }
 }

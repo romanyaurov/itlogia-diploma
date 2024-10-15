@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -76,7 +76,7 @@ export class BlogComponent implements OnInit {
   private initCurrentPage(): void {
     const currentPage = this.route.snapshot.queryParams['page'];
     if (currentPage) {
-      this.currentPage = currentPage;
+      this.currentPage = +currentPage;
     }
   }
 

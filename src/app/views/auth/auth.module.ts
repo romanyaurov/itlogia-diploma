@@ -9,6 +9,7 @@ import { StaticImagePathPipe } from 'src/app/shared/pipes/static-image-path.pipe
 import { ReactiveFormsModule } from '@angular/forms';
 import { SvgIconComponent } from 'src/app/shared/components/common/svg-icon/svg-icon.component';
 import { NameInputDirective } from 'src/app/shared/directives/name-input.directive';
+import { ModalModule } from 'src/app/shared/components/modal/modal.module';
 
 
 @NgModule({

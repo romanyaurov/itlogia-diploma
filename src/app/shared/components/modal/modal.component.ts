@@ -1,39 +1,22 @@
-import { Component, ElementRef, HostListener, inject, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CustomModalService } from '../../services/custom-modal.service';
-import { CommonModule } from '@angular/common';
 import { ModalTemplatesEnum } from 'src/types/modal-templates.enum';
 import { OrderServicesEnum } from 'src/types/order-services.enum';
-import { ModalAgreementComponent } from './templates/modal-agreement/modal-agreement.component';
-import { ModalProcessingComponent } from './templates/modal-processing/modal-processing.component';
-import { ModalOrderComponent } from './templates/modal-order/modal-order.component';
-import { ModalConsultationComponent } from './templates/modal-consultation/modal-consultation.component';
-import { ModalSuccessComponent } from './templates/modal-success/modal-success.component';
 import { ConsultationRequestType } from 'src/types/consultation-request.type';
 import { OrderRequestType } from 'src/types/order-request.type';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-modal',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ModalAgreementComponent,
-    ModalProcessingComponent,
-    ModalOrderComponent,
-    ModalConsultationComponent,
-    ModalSuccessComponent
-  ],
+  standalone: false,
   templateUrl: './modal.component.html',
-  styleUrl: './modal.component.scss',
-  providers: []
+  styleUrl: './modal.component.scss'
 })
 export class ModalComponent implements OnInit {
 
   protected modalTemplatesEnum = ModalTemplatesEnum;
   protected currentTemplate: TemplateRef<any> | null = null;
   protected orderType: OrderServicesEnum | null = null;
-  protected modalService: CustomModalService = inject(CustomModalService);
-  private snackBar: MatSnackBar = inject(MatSnackBar);
 
   @ViewChild(
     'modalFormConsultation',
@@ -61,7 +44,9 @@ export class ModalComponent implements OnInit {
   ) modalSuccess!: TemplateRef<any>;
 
   constructor(
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    protected modalService: CustomModalService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {

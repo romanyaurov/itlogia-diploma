@@ -4,7 +4,7 @@ import { BehaviorSubject, catchError, filter, Observable, switchMap, take, throw
 import { AuthService } from "./auth.service";
 import { LoginResponseType } from "src/types/login-response.type";
 import { DefaultResponseType } from "src/types/default-response.type";
-import { TypeCheckingService } from "src/app/shared/services/type-checking.service";
+import { TypeCheckingUtil } from "src/app/shared/utils/type-checking.util"; 
 
 export const authInterceptor: HttpInterceptorFn = (
     req: HttpRequest<any>,
@@ -12,7 +12,7 @@ export const authInterceptor: HttpInterceptorFn = (
 ): Observable<HttpEvent<any>> => {
 
     const authService: AuthService = inject(AuthService);
-    const typeChecker: TypeCheckingService = inject(TypeCheckingService);
+    const typeChecker: TypeCheckingUtil = inject(TypeCheckingUtil);
     let isRefreshing: boolean = false;
     const refreshTokenSubject: BehaviorSubject<string | null> = 
         new BehaviorSubject<string | null>(null);

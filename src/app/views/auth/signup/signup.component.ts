@@ -2,9 +2,11 @@ import { Component, signal, WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { CustomModalService } from 'src/app/shared/services/custom-modal.service';
-import { TypeCheckingService } from 'src/app/shared/services/type-checking.service';
+import { AuthFormState } from 'src/app/shared/state/auth/auth.reducer';
+import { TypeCheckingUtil } from 'src/app/shared/utils/type-checking.util';
 import { emailValidator } from 'src/app/shared/validators/custom-email.validator';
 import { nameInputValidator } from 'src/app/shared/validators/name-input.validator';
 import { passwordValidator } from 'src/app/shared/validators/password-input.validator';
@@ -33,8 +35,9 @@ export class SignupComponent {
     private fb: NonNullableFormBuilder,
     private router: Router,
     private snackBar: MatSnackBar,
-    private typeChecker: TypeCheckingService,
-    protected modalService: CustomModalService
+    private typeChecker: TypeCheckingUtil,
+    protected modalService: CustomModalService,
+    private store: Store<AuthFormState>
   ) { }
 
   // Form Fields Template
@@ -79,13 +82,5 @@ export class SignupComponent {
           });
       }
     }
-  }
-
-  protected openAgreementInfoModal(): void {
-
-  }
-
-  protected openProcessingInfoModal(): void {
-    
   }
 }

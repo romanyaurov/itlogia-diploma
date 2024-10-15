@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { FooterComponent } from "./footer/footer.component";
 import { HeaderComponent } from "./header/header.component";
 import { RouterModule } from '@angular/router';
-import { ModalComponent } from "../components/modal/modal.component";
 import { CustomModalService } from '../services/custom-modal.service';
 import { HttpClient } from '@angular/common/http';
 import { MenuType } from 'src/types/menu-item.type';
 import { map, Observable } from 'rxjs';
+import { ModalModule } from '../components/modal/modal.module';
 
 @Component({
   selector: 'app-layout',
@@ -15,7 +15,7 @@ import { map, Observable } from 'rxjs';
     FooterComponent,
     HeaderComponent,
     RouterModule,
-    ModalComponent
+    ModalModule
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
