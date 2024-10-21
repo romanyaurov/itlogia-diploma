@@ -6,7 +6,7 @@ import { CustomModalService } from '../services/custom-modal.service';
 import { HttpClient } from '@angular/common/http';
 import { MenuType } from 'src/types/menu-item.type';
 import { map, Observable } from 'rxjs';
-import { ModalModule } from '../components/modal/modal.module';
+import { ModalModule } from '../features/modal/modal.module';
 
 @Component({
   selector: 'app-layout',

@@ -6,6 +6,9 @@ import { UserInfoResponseType } from 'src/types/user-info-response.type';
 import { LoginFieldsEnum } from 'src/types/login-fields.enum';
 import { Router } from '@angular/router';
 import { emailValidator } from 'src/app/shared/validators/custom-email.validator';
+import { FormStateService } from 'src/app/shared/services/form-state.service';
+import { FormSaver } from 'src/app/shared/utils/form-saver.decorator';
+import { ModalFormSavedData } from 'src/types/modal-form-saved-data.interface';
 
 @Component({
   selector: 'app-signin',
@@ -13,6 +16,7 @@ import { emailValidator } from 'src/app/shared/validators/custom-email.validator
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss'
 })
+@FormSaver<ModalFormSavedData>('authForm', 'signInForm')
 export class SigninComponent {
 
   // For using in Template
@@ -26,6 +30,7 @@ export class SigninComponent {
     private fb: NonNullableFormBuilder,
     private router: Router,
     private snackBar: MatSnackBar,
+    private formStateService: FormStateService
   ) { }
   
   // Form Fields Template
